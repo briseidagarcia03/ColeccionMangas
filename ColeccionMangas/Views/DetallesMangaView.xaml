@@ -7,53 +7,78 @@
              mc:Ignorable="d" 
              
              d:DesignHeight="450" d:DesignWidth="800">
-  
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="https://img.freepik.com/vector-gratis/fondo-azul-abstracto-comico_225004-669.jpg"></ImageBrush>
-        </Grid.Background>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"></ColumnDefinition>
-            <ColumnDefinition Width="500"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Border>
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="100"></DropShadowEffect>
-            </Border.Effect>
-            <Image Height="300" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-        </Border>
-        
-        <Border Grid.Column="1">
-            <Border.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="FontSize" Value="20"></Setter>
-                    <Setter Property="TextAlignment" Value="Right"></Setter>
-                    <Setter Property="Padding" Value="10"></Setter>
-                    <Setter Property="Foreground" Value="White"></Setter>
-                   
-                </Style>
-               
-            </Border.Resources>
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="TextAlignment" Value="Right"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
             
-           <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="480">
-                <DockPanel><TextBlock FontWeight="Bold" Width="240"> Titulo: </TextBlock>
-                <TextBlock>Attack On Titan</TextBlock></DockPanel>
-                <DockPanel><TextBlock FontWeight="Bold" Width="240"> Autor:</TextBlock>
-                <TextBlock>Hajime Isayama</TextBlock></DockPanel>
-               <DockPanel> <TextBlock FontWeight="Bold" Width="240">Género:</TextBlock>
-                <TextBlock>Acción</TextBlock></DockPanel>
-                <DockPanel> <TextBlock FontWeight="Bold" Width="240" >Año de lanzamiento:</TextBlock>
-                <TextBlock>2009</TextBlock></DockPanel>
-                
-                <DockPanel><TextBlock FontWeight="Bold" Width="240"> Número total de tomos:</TextBlock>
-                <TextBlock >34</TextBlock></DockPanel>
-                <DockPanel></DockPanel>
-                <TextBlock FontWeight="Bold" Width="200" TextAlignment="Center">Sinopsis:</TextBlock>
-                <TextBlock TextWrapping="Wrap" FontSize="16" >
-                   La trama gira en torno a Eren Jaeger y sus amigos de la infancia, Armin Arlert y Mikasa Ackerman, en un mundo ficticio en donde la población humana vive concentrada dentro de tres grandes muros para protegerse de unos seres gigantescos llamados Titanes.
-                 </TextBlock>
-           </StackPanel> 
-        </Border>
+        </Style>
         
-    </Grid>
+    </UserControl.Resources>
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Grid>
+                       
+                        <Grid.Background>
+                            <ImageBrush ImageSource="https://www.creativefabrica.com/wp-content/uploads/2020/08/20/comic-background-template-for-design-Graphics-5047065-1.jpg"></ImageBrush>
+                        </Grid.Background>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="280"></ColumnDefinition>
+                            <ColumnDefinition Width="500"></ColumnDefinition>
+                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="1" TextAlignment="Left" FontSize="22">Detalles del Manga</TextBlock>
+                        <Border Grid.Row="1">
+                            <Border.Effect>
+                               <DropShadowEffect BlurRadius="100"></DropShadowEffect>
+                            </Border.Effect>
+                            <Image Height="300" Source="{Binding Manga.Imagen}"></Image>
+                        </Border>
+        
+                        <Border Grid.Column="1" Grid.Row="1" Background="white" Margin="5" CornerRadius="30" Height="360" >
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="10"></DropShadowEffect>
+                            </Border.Effect>
+            
+                          <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="480">
+                            <DockPanel ><TextBlock FontWeight="Bold" Width="240"> Titulo: </TextBlock>
+                                    <TextBlock TextAlignment="Left" Text="{Binding Manga.Titulo}"></TextBlock></DockPanel>
+                            <DockPanel><TextBlock FontWeight="Bold" Width="240"> Autor:</TextBlock>
+                                    <TextBlock TextAlignment="Left" Text="{Binding Manga.Autor}"></TextBlock></DockPanel>
+                                <DockPanel>
+                                    <TextBlock FontWeight="Bold" Width="240">Género:</TextBlock>
+                                    <TextBlock TextAlignment="Left" Text="{Binding Manga.Genero}"></TextBlock>
+                                </DockPanel>
+                                <DockPanel><TextBlock FontWeight="Bold" Width="240"> Número de tomos:</TextBlock>
+                            <TextBlock TextAlignment="Left" Text="{Binding Manga.NumTomos}">34</TextBlock></DockPanel>
+           
+                            <TextBlock FontWeight="Bold" Width="200" TextAlignment="Left" >Sinopsis:</TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="14" TextAlignment="Justify" Margin="5,0,5,10" Text="{Binding Manga.Sinopsis}">
+            
+                           </TextBlock>
+                          </StackPanel> 
+                        </Border>
+        
+                    </Grid>
+                </Setter.Value>
+            </Setter>
+            <!--<Style.Triggers>
+                <DataTrigger Binding="{Binding Manga}" Value="{x:Null}">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="White">Aquí se mostrará la información que seleccione</TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>-->
+        </Style>
+    </UserControl.Style>
+    
 </UserControl>

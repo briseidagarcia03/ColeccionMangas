@@ -5,14 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColeccionMangas"
         xmlns:model="clr-namespace:MangasMVVM.Model"
-        xmlns:view="clr-namespace:MangasMVVM.Views"
+         xmlns:viewmodel="clr-namespace:MangasMVVM.ViewModel" xmlns:views="clr-namespace:MangasMVVM.Views"
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="NoResize"
         Background="Transparent"
         Height="600" Width="1000">
-
+    <Window.DataContext>
+        <viewmodel:MangasViewModel x:Name="mvm"></viewmodel:MangasViewModel>
+    </Window.DataContext>
+    <!--<Window.Resources>
+        <DataTemplate DataType="{x:Type model:Manga}">
+            <local:MangasView></local:MangasView>
+        </DataTemplate>
+    </Window.Resources>-->
     <Border Background="#570530" CornerRadius="30">
         <Grid Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
@@ -27,36 +34,45 @@
 
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="26" FontFamily="Yu Gothic UI Semibold" >Mangas</TextBlock>
             <StackPanel Grid.Row="1" Margin="20,20,10,20">
-                <RadioButton Foreground="White" FontSize="14" Content="Inicio" Style="{StaticResource MenuButton}">
+                <RadioButton Foreground="White" FontSize="14" Content="Agregar un manga" Style="{StaticResource MenuButton}" Command="{Binding ShowCommand}" CommandParameter="Agregar">
                 </RadioButton>
-                <RadioButton Foreground="White" FontSize="14" Content="Mostrar repertorio" Style="{StaticResource MenuButton}" >
+                <RadioButton Foreground="White" FontSize="14" Content="Mostrar repertorio" Style="{StaticResource MenuButton}" Command="{Binding ShowCommand}" CommandParameter="Repertorio">
                 </RadioButton>
-                <Label Foreground="White" FontSize="14">Últimos agregados:</Label>
-                <ListBox Margin="0,10,0,0" Height="300" Background="Transparent" HorizontalContentAlignment="Center" >
-                    <StackPanel>
-                        <Image Height="100" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-                        <Label Foreground="White">Attack on Titan</Label>
-                    </StackPanel>
-                    <StackPanel>
-                        <Image Height="100" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-                        <Label Foreground="White">Attack on Titan</Label>
-                    </StackPanel>
-                    <StackPanel>
-                        <Image Height="100" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-                        <Label Foreground="White">Attack on Titan</Label>
-                    </StackPanel>
-                     <StackPanel>
-                        <Image Height="100" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-                        <Label Foreground="White">Attack on Titan</Label>
-                    </StackPanel>
+                <Label Foreground="White" FontSize="14" Margin="0,80,0,0">Últimos agregados:</Label>
+                <ListBox Margin="0,10,0,0" Height="270" Background="Transparent" HorizontalContentAlignment="Center" x:Name="lstMangas" SelectedItem="{Binding Manga}" ItemsSource="{Binding Lista}" >
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Command="{Binding ShowCommand}" CommandParameter="Editar" Header="Editar"></MenuItem>
+                            <MenuItem Click="MenuItem_Click" Header="Eliminar"></MenuItem>                      
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+
+
                 </ListBox>
-                <Button Content="Agregar" FontSize="14" Margin="0,10,0,0" Height="30"></Button>
+                
             </StackPanel>
             <Border Grid.Column="1" Grid.Row="1" Background="#980F5A" Margin="10,0,20,30" CornerRadius="20">
                 <ContentControl>
                     <ContentControl.Resources>
-                        <view:RepertorioView x:Key="repertorio"></view:RepertorioView>
+                        <views:DetallesMangaView x:Key="detalles"></views:DetallesMangaView>
+                        <views:AgregarEditarManga x:Key="agregar"></views:AgregarEditarManga>
+                        <views:RepertorioView x:Key="repertorio"></views:RepertorioView>
                     </ContentControl.Resources>
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Vista}" Value="Ver">
+                                    <Setter Property="Content" Value="{StaticResource detalles}"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Vista}" Value="Agregar">
+                                    <Setter Property="Content" Value="{StaticResource agregar}"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Vista}" Value="Repertorio">
+                                    <Setter Property="Content" Value="{StaticResource repertorio}"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
                     <!--<TextBlock Grid.Column="1" Grid.Row="1" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">Aquí se mostrará tu colección de mangas</TextBlock>-->
                 </ContentControl>
                 

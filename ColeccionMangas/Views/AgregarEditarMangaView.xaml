@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MangasMVVM.Views"
+             xmlns:local="clr-namespace:MangasMVVM.Views" xmlns:viewmodel="clr-namespace:MangasMVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MangasViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -18,48 +18,43 @@
             
         </Style>
         <Style TargetType="DockPanel">
-            <Setter Property="Margin" Value="10"> </Setter>
-
-           
+            <Setter Property="Margin" Value="10"></Setter>
         </Style>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel Margin="5">
         <TextBlock FontSize="24" Foreground="White">INSERTAR DATOS DEL MANGA:</TextBlock>
         <DockPanel> 
             <Label>Nombre del Manga:</Label>
-            <TextBox></TextBox>
+            <TextBox Text="{Binding Manga.Titulo}"></TextBox>
         </DockPanel>
         <DockPanel>
            <Label>Autor del Manga:</Label>
-           <TextBox></TextBox> 
+           <TextBox Text="{Binding Manga.Autor}"></TextBox> 
         </DockPanel>
-        <WrapPanel >
+        <WrapPanel HorizontalAlignment="Center" >
             <DockPanel>
-                <Label>Año de Lanzamiento:</Label>
-            <TextBox Width="220"></TextBox>
+                <Label VerticalAlignment="Center">Género del Manga:</Label>
+                <TextBox Width="210" Text="{Binding Manga.Genero}"></TextBox>
             </DockPanel>
             <DockPanel HorizontalAlignment="Right">
                 <Label HorizontalContentAlignment="Right">Número de tomos:</Label>
-                <TextBox Width="220"></TextBox>
+                <TextBox Width="210" Text="{Binding Manga.NumTomos}"></TextBox>
             </DockPanel>
             
         </WrapPanel>
-        <DockPanel>
-             <Label>Género del Manga:</Label>
-             <TextBox></TextBox>
-        </DockPanel>
-      
+ 
         <DockPanel>
             <Label>URL de Imagen:</Label>
-            <TextBox></TextBox>
+            <TextBox Text="{Binding Manga.Imagen}"></TextBox>
         </DockPanel>
         <DockPanel>
             <Label>Sinopsis:</Label>
-            <TextBox AcceptsReturn="True" Height="100"></TextBox>
+            <TextBox AcceptsReturn="True" Height="100" Text="{Binding Manga.Sinopsis}"></TextBox>
         </DockPanel>
         <WrapPanel HorizontalAlignment="Right">
-            <Button Padding="20,5,20,5" Margin="20,5">GUARDAR</Button>
-            <Button Padding="20,5,20,5"  Margin="20,5">CANCELAR</Button>
+            <TextBlock Text="{Binding Error}" Foreground="red" FontSize="18" VerticalAlignment="Center"></TextBlock>
+            <Button Padding="20,5,20,5" Margin="20,5" Command="{Binding GuardarCommand}">GUARDAR</Button>
+            <Button Padding="20,5,20,5"  Margin="20,5" Command="{Binding CancelarCommand}" >CANCELAR</Button>
         </WrapPanel>
     </StackPanel>
 </UserControl>

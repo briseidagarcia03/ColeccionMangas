@@ -3,27 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MangasMVVM.Views"
+             xmlns:local="clr-namespace:MangasMVVM.Views" xmlns:viewmodel="clr-namespace:MangasMVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MangasViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+             d:DesignHeight="450" d:DesignWidth="730">
+    <UserControl.DataContext>
+        <viewmodel:MangasViewModel x:Name="mvm"></viewmodel:MangasViewModel>
+    </UserControl.DataContext>
+    <ListBox x:Name="listaMangaRepertorio" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#F8A1D1" SelectedItem="{Binding Manga}" ItemsSource="{Binding Lista}">
+       <ListBox.ContextMenu>
+            <ContextMenu>
+                  <MenuItem Command="{Binding ShowCommand}" CommandParameter="Editar" Header="Editar"></MenuItem>
+                  <MenuItem Click="MenuItem_Click" Header="Eliminar"></MenuItem>                      
+            </ContextMenu>
+                    
+        </ListBox.ContextMenu> 
         <ListBox.ItemsPanel>
+            
             <ItemsPanelTemplate>
                 <WrapPanel></WrapPanel>
             </ItemsPanelTemplate>
         </ListBox.ItemsPanel>
-        <ListBox.ContextMenu>
-            <ContextMenu>
-                <MenuItem>
-                    pa eliminar y editor al click 
-                </MenuItem>
-            </ContextMenu>
-        </ListBox.ContextMenu>
+        
         <StackPanel>
-            <Image Height="200" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-            <Label HorizontalAlignment="Center" FontSize="18">Attack on Titan</Label>
+            <Image Height="200" Source="{Binding Manga.Imagen}"></Image>
+            <Label HorizontalAlignment="Center" FontSize="18" Content="{Binding Manga.Titulo}"></Label>
         </StackPanel>
-        <StackPanel>
+        <!--<StackPanel>
             <Image Height="200" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
             <Label HorizontalAlignment="Center" FontSize="18">Attack on Titan</Label>
         </StackPanel>
@@ -42,6 +47,6 @@
         <StackPanel>
             <Image Height="200" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
             <Label HorizontalAlignment="Center" FontSize="18" >Attack on Titan</Label>
-        </StackPanel>
+        </StackPanel>-->
     </ListBox>
 </UserControl>

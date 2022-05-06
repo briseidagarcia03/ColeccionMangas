@@ -11,7 +11,6 @@ namespace MangasMVVM.Model
         public string Titulo { get; set; } = "";
         public string Genero { get; set; } = "";
         public string Autor { get; set; } = "";
-        public int Anio { get;  set; }
         public int NumTomos { get; set; }
         public string Sinopsis { get; set; } = "";
         public string Imagen { get; set; } = "";

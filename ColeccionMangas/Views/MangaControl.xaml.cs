@@ -16,22 +16,13 @@ using System.Windows.Shapes;
 namespace MangasMVVM.Views
 {
     /// <summary>
-    /// Lógica de interacción para RepertorioView.xaml
+    /// Lógica de interacción para MangaControl.xaml
     /// </summary>
-    public partial class RepertorioView : UserControl
+    public partial class MangaControl : UserControl
     {
-        public RepertorioView()
+        public MangaControl()
         {
             InitializeComponent();
-        }
-
-        
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            if(MessageBox.Show("¿Desea eliminar el manga seleccionado?","Confirme", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                mvm.EliminarCommand.Execute(null);
-            }
         }
     }
 }
