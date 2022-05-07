@@ -14,7 +14,7 @@
             <local:MangaControl></local:MangaControl>
         </DataTemplate>
     </UserControl.Resources>
-    <ContentControl>
+  
     <Border CornerRadius="30" Width="800">
         <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#980F5A" SelectedItem="{Binding Manga}" 
              ItemsSource="{Binding Lista}" ItemTemplate="{StaticResource MangaList}" x:Name="lista">
@@ -36,20 +36,6 @@
     </ListBox>
      
     </Border>
-        <ContentControl.Style>
-            <Style TargetType="ContentControl">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Vista}" Value="Ver">
-                        <Setter Property="Content" Value="{StaticResource detalles}"> </Setter>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Vista}" Value="Repertorio">
-                        <Setter Property="Content" Value="{StaticResource repertorio}"></Setter>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Vista}" Value="Editar">
-                        <Setter Property="Content" Value="{StaticResource agregar}"></Setter>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </ContentControl.Style>
-    </ContentControl>
+        
+    
 </UserControl>
