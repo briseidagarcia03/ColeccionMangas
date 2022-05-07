@@ -5,15 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MangasMVVM.Views" xmlns:viewmodel="clr-namespace:MangasMVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MangasViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="730">
+             d:DesignHeight="450" d:DesignWidth="700">
     <UserControl.DataContext>
         <viewmodel:MangasViewModel x:Name="mvm"></viewmodel:MangasViewModel>
     </UserControl.DataContext>
-    <ListBox x:Name="listaMangaRepertorio" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#F8A1D1" SelectedItem="{Binding Manga}" ItemsSource="{Binding Lista}">
+    <UserControl.Resources>
+        <DataTemplate x:Key="MangaList">
+            <local:MangaControl></local:MangaControl>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ContentControl>
+    <Border CornerRadius="30" Width="800">
+        <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#980F5A" SelectedItem="{Binding Manga}" 
+             ItemsSource="{Binding Lista}" ItemTemplate="{StaticResource MangaList}" x:Name="lista">
        <ListBox.ContextMenu>
             <ContextMenu>
-                  <MenuItem Command="{Binding ShowCommand}" CommandParameter="Editar" Header="Editar"></MenuItem>
-                  <MenuItem Click="MenuItem_Click" Header="Eliminar"></MenuItem>                      
+                    <MenuItem Command="{Binding ShowCommand}" CommandParameter="Ver" Header=" Ver Detalles"></MenuItem>
+                    <MenuItem Command="{Binding ShowCommand}" CommandParameter="Editar" Header="Editar"></MenuItem>
+                  <MenuItem Click="MenuItem_Click" Header="Eliminar" CommandParameter="Eliminar"></MenuItem>                      
             </ContextMenu>
                     
         </ListBox.ContextMenu> 
@@ -24,29 +33,23 @@
             </ItemsPanelTemplate>
         </ListBox.ItemsPanel>
         
-        <StackPanel>
-            <Image Height="200" Source="{Binding Manga.Imagen}"></Image>
-            <Label HorizontalAlignment="Center" FontSize="18" Content="{Binding Manga.Titulo}"></Label>
-        </StackPanel>
-        <!--<StackPanel>
-            <Image Height="200" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-            <Label HorizontalAlignment="Center" FontSize="18">Attack on Titan</Label>
-        </StackPanel>
-        <StackPanel>
-            <Image Height="200" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-            <Label HorizontalAlignment="Center" FontSize="18" >Attack on Titan</Label>
-        </StackPanel>
-        <StackPanel>
-            <Image Height="200" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-            <Label HorizontalAlignment="Center" FontSize="18" >Attack on Titan</Label>
-        </StackPanel>
-        <StackPanel>
-            <Image Height="200" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-            <Label HorizontalAlignment="Center" FontSize="18" >Attack on Titan</Label>
-        </StackPanel>
-        <StackPanel>
-            <Image Height="200" Source="https://http2.mlstatic.com/D_NQ_NP_785262-MLM29164796307_012019-O.jpg"></Image>
-            <Label HorizontalAlignment="Center" FontSize="18" >Attack on Titan</Label>
-        </StackPanel>-->
     </ListBox>
+     
+    </Border>
+        <ContentControl.Style>
+            <Style TargetType="ContentControl">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Vista}" Value="Ver">
+                        <Setter Property="Content" Value="{StaticResource detalles}"> </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Vista}" Value="Repertorio">
+                        <Setter Property="Content" Value="{StaticResource repertorio}"></Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Vista}" Value="Editar">
+                        <Setter Property="Content" Value="{StaticResource agregar}"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ContentControl.Style>
+    </ContentControl>
 </UserControl>

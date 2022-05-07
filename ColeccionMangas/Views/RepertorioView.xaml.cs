@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MangasMVVM.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +25,12 @@ namespace MangasMVVM.Views
         public RepertorioView()
         {
             InitializeComponent();
+           
         }
 
-        
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if(MessageBox.Show("¿Desea eliminar el manga seleccionado?","Confirme", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("¿Desea eliminar el manga seleccionado?", "Confirme", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 mvm.EliminarCommand.Execute(null);
             }

@@ -26,7 +26,15 @@ namespace ColeccionMangas
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            if (MessageBox.Show("¿Desea eliminar el manga seleccionado?", "Confirme", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                mvm.EliminarCommand.Execute(null);
+            }
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

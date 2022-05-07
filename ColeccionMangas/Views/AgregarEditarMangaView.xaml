@@ -21,8 +21,9 @@
             <Setter Property="Margin" Value="10"></Setter>
         </Style>
     </UserControl.Resources>
+    <Border Margin="10,20,10,10">
     <StackPanel Margin="5">
-        <TextBlock FontSize="24" Foreground="White">INSERTAR DATOS DEL MANGA:</TextBlock>
+            <TextBlock FontSize="24" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,10" FontFamily="Segoe Print">INSERTE LOS DATOS DEL MANGA</TextBlock>
         <DockPanel> 
             <Label>Nombre del Manga:</Label>
             <TextBox Text="{Binding Manga.Titulo}"></TextBox>
@@ -34,11 +35,11 @@
         <WrapPanel HorizontalAlignment="Center" >
             <DockPanel>
                 <Label VerticalAlignment="Center">Género del Manga:</Label>
-                <TextBox Width="210" Text="{Binding Manga.Genero}"></TextBox>
+                <TextBox Width="230" Text="{Binding Manga.Genero}"></TextBox>
             </DockPanel>
             <DockPanel HorizontalAlignment="Right">
                 <Label HorizontalContentAlignment="Right">Número de tomos:</Label>
-                <TextBox Width="210" Text="{Binding Manga.NumTomos}"></TextBox>
+                <TextBox Width="230" Text="{Binding Manga.NumTomos}"></TextBox>
             </DockPanel>
             
         </WrapPanel>
@@ -49,12 +50,25 @@
         </DockPanel>
         <DockPanel>
             <Label>Sinopsis:</Label>
-            <TextBox AcceptsReturn="True" Height="100" Text="{Binding Manga.Sinopsis}"></TextBox>
+            <TextBox AcceptsReturn="True"  TextWrapping="Wrap" Height="100" Text="{Binding Manga.Sinopsis}"></TextBox>
         </DockPanel>
         <WrapPanel HorizontalAlignment="Right">
             <TextBlock Text="{Binding Error}" Foreground="red" FontSize="18" VerticalAlignment="Center"></TextBlock>
-            <Button Padding="20,5,20,5" Margin="20,5" Command="{Binding GuardarCommand}">GUARDAR</Button>
-            <Button Padding="20,5,20,5"  Margin="20,5" Command="{Binding CancelarCommand}" >CANCELAR</Button>
+                <Button Padding="20,5,20,5" Margin="20,5" Content="GUARDAR" Background="#FF0D81" Foreground="white"  FontWeight="Bold"  >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Vista}" Value="Agregar">
+                                <Setter Property="Command" Value="{Binding AgregarCommand}"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Vista}" Value="Editar">
+                                <Setter Property="Command" Value="{Binding GuardarCommand}"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style></Button>
+                <Button Padding="20,5,20,5" Background="#FF0D81" Foreground="white" FontWeight="Bold" Margin="20,5" Command="{Binding CancelarCommand}" >CANCELAR</Button>
         </WrapPanel>
     </StackPanel>
+    </Border>
 </UserControl>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MangasMVVM.Views"
              mc:Ignorable="d" 
              
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="700">
     <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="18"></Setter>
@@ -21,21 +21,19 @@
         <Style TargetType="UserControl">
             <Setter Property="Content">
                 <Setter.Value>
-                    <Grid>
+                    <Border Background="Orange" CornerRadius="20">
+                    <Grid Width="860" Height="500">
                        
                         <Grid.Background>
                             <ImageBrush ImageSource="https://www.creativefabrica.com/wp-content/uploads/2020/08/20/comic-background-template-for-design-Graphics-5047065-1.jpg"></ImageBrush>
                         </Grid.Background>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="280"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
                             <ColumnDefinition Width="500"></ColumnDefinition>
                          </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="1" TextAlignment="Left" FontSize="22">Detalles del Manga</TextBlock>
-                        <Border Grid.Row="1">
+                      
+                        
+                        <Border Grid.Row="1" CornerRadius="30">
                             <Border.Effect>
                                <DropShadowEffect BlurRadius="100"></DropShadowEffect>
                             </Border.Effect>
@@ -48,6 +46,7 @@
                             </Border.Effect>
             
                           <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="480">
+                                    <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="bold" Foreground="Orangered" FontFamily="Segoe Print">Detalles del manga</TextBlock>
                             <DockPanel ><TextBlock FontWeight="Bold" Width="240"> Titulo: </TextBlock>
                                     <TextBlock TextAlignment="Left" Text="{Binding Manga.Titulo}"></TextBlock></DockPanel>
                             <DockPanel><TextBlock FontWeight="Bold" Width="240"> Autor:</TextBlock>
@@ -67,18 +66,20 @@
                         </Border>
         
                     </Grid>
+                    </Border>
                 </Setter.Value>
             </Setter>
-            <!--<Style.Triggers>
+            <Style.Triggers>
                 <DataTrigger Binding="{Binding Manga}" Value="{x:Null}">
                     <Setter Property="Content">
                         <Setter.Value>
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="White">Aquí se mostrará la información que seleccione</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Segoe Print">Aquí se mostrará la información que seleccione</TextBlock>
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
-            </Style.Triggers>-->
+            </Style.Triggers>
         </Style>
+
     </UserControl.Style>
     
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using MangasMVVM.Model;
+using MangasMVVM.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,9 @@ namespace MangasMVVM.ViewModel
 
         
 
-        public ObservableCollection<Model.Manga> Lista { get; set; } = new ObservableCollection<Model.Manga>();
-        public Model.Manga? Manga 
+        public ObservableCollection<Manga> Lista { get; set; } = new ObservableCollection<Manga>();
+       
+        public Manga? Manga 
         {
             get { return manga; }
             set { manga = value; PropertyChange("Manga"); }
@@ -37,6 +39,7 @@ namespace MangasMVVM.ViewModel
 
         public MangasViewModel()
         {
+            CargarManga();
             AgregarCommand = new RelayCommand(Agregar);
             EliminarCommand = new RelayCommand(Eliminar);
             CancelarCommand = new RelayCommand(Cancelar);
@@ -57,9 +60,9 @@ namespace MangasMVVM.ViewModel
         private void Show(string obj)
         {
             Vista = obj;
-            if(Vista == "Manga")
+            if(Vista == "Agregar")
             {
-                Manga = new Model.Manga();
+                Manga = new Manga();
             }
             if(Vista == "Editar")
             {
@@ -78,6 +81,7 @@ namespace MangasMVVM.ViewModel
                     Manga = copia;
                 }
             }
+            
             PropertyChange();           
         }
 
@@ -116,11 +120,7 @@ namespace MangasMVVM.ViewModel
                     Error = "Escribe el autor del manga";
                     PropertyChange("Error"); return;
                 }
-                if (string.IsNullOrWhiteSpace(Manga.Titulo))
-                {
-                    Error = "Escribe el número de tomos del manga";
-                    PropertyChange("Error"); return;
-                }
+
                 if (string.IsNullOrWhiteSpace(Manga.Sinopsis))
                 {
                     Error = "Escribe la sinopsis del manga";
@@ -133,7 +133,7 @@ namespace MangasMVVM.ViewModel
                 }
                 if (!Uri.TryCreate(Manga.Imagen, UriKind.Absolute, out var uri))
                 {
-                    Error = "Escribe una url valida para ka imágen del manga";
+                    Error = "Escribe una url valida para la imágen del manga";
                     PropertyChange("Error"); return;
                 }
                 Lista.Add(Manga);
@@ -143,10 +143,7 @@ namespace MangasMVVM.ViewModel
             }
         }
 
-        void PropertyChange(string? prop = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
+      
 
         private void GuardarManga()
         {
@@ -159,7 +156,7 @@ namespace MangasMVVM.ViewModel
             if(File.Exists("mangas.json"))
             {
                 var json = File.ReadAllText("mangas.json");
-                var datos = JsonConvert.DeserializeObject<ObservableCollection<Manga>>(json);
+                var datos = JsonConvert.DeserializeObject<ObservableCollection<Manga>?>(json);
                 
                 if(datos != null)
                 {
@@ -171,6 +168,10 @@ namespace MangasMVVM.ViewModel
                 }
             }
  
+        }
+        void PropertyChange(string? prop = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
         public event PropertyChangedEventHandler? PropertyChanged;
     }
